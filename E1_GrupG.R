@@ -4,11 +4,12 @@ frequencies <- c(2,8,5,13,20,37,50,68,42,19) #FREQÜÈNCIA DE LES VALORACIONS EN
 vectorvalors <- rep(valoracions, frequencies)
 table(vectorvalors) #TAULA DE FREQÜÈNCIES ABSOLUTES
 table(vectorvalors)/length(vectorvalors) #TAULA DE FREQÜÈNCIA RELATIVA
-cumsum(table(vectorvalors)) #TAULA DE FREQÜÈNCIES ABSOLUTES ACOMULADA
-cumsum(table(vectorvalors)/length(vectorvalors))#TAULA DE FREQÜÈNCIES RELATIVES ACOMULADA
+cumsum(table(vectorvalors)) #TAULA DE FREQÜÈNCIES ABSOLUTES ACUMULADA
+cumsum(table(vectorvalors)/length(vectorvalors))#TAULA DE FREQÜÈNCIES RELATIVES ACUMULADA
 
 "APARTAT B"
 mean(vectorvalors) #MITJANA DE LA TAULA 
+median(vectorvalors) #MEDIANA DE LA TAULA
 var(vectorvalors) #VARIÀNCIA CORREGIDA
 
 variancia <- function(x){
@@ -19,6 +20,15 @@ variancia <- function(x){
   
   variacio
 }
-
 variancia(vectorvalors) #VARIÀNCIA
 
+sd(vectorvalors) #DESVIACIÓ TÍPICA CORREGIDA
+
+desv<-function(x){
+  mitjana<-mean(x)
+  n<- length(x)
+  fdd<-(x-rep(mitjana,n))**2/n
+  sum(fdd)
+  res<-sqrt(fdd)
+}
+desv(vectorvalors) #DESVIACIÓ TÍPICA
