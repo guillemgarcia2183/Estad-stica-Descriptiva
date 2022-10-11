@@ -32,3 +32,5 @@ desv<-function(x){
   res<-sqrt(fdd)
 }
 desv(vectorvalors) #DESVIACIÓ TÍPICA
+
+"APARTAT C"
