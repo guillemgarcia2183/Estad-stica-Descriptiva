@@ -1,4 +1,5 @@
-"EXERCICI 1, APARTAT A"
+"EXERCICI 1"
+"APARTAT A"
 valoracions <- c(1,2,3,4,5,6,7,8,9,10) #VALORS DE LES VALORACIONS
 frequencies <- c(2,8,5,13,20,37,50,68,42,19) #FREQÜÈNCIA DE LES VALORACIONS EN ORDRE
 bellavista <- rep(valoracions, frequencies)
@@ -56,3 +57,9 @@ barplot(x2, main="Hotel Bonambient", sub="Valoracions dels usuaris")
 # DIAGRAMES DE CAIXES
 boxplot(bellavista, main="Hotel Bellavista")
 boxplot(bonambient, main="Hotel Bonambient")
+"Exercici 2"
+"APARTAT A
+library(dplyr) # Per poder utilitzar la funció filter
+df<-load("~/R/motos.RData")
+cadena<- (motos %>% filter(TRANSMISSIO=="Cadena"))$PREU
+corretja<- (motos %>% filter(TRANSMISSIO=="Corretja"))$PREU
