@@ -88,3 +88,8 @@ max(cadena)
 max(corretja)
 "APARTAT B"
 # Coeficient de variació = desviació típica/mitjana
+CV_cad<-desviacio_tipica(cadena)/mean(cadena)
+CV_cor<-desviacio_tipica(corretja)/mean(corretja)
+"APARTAT C" 
+boxplot(cadena, main="Motos amb transmissió per cadena")
+boxplot(corretja, main="Motos amb transmissió per corretja")
