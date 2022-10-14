@@ -13,6 +13,7 @@ mean(bellavista) #MITJANA DE LA TAULA
 median(bellavista) #MEDIANA DE LA TAULA
 var(bellavista) #VARIÀNCIA CORREGIDA
 
+# FUNCIÓ PER CALCULAR LA VARIÀNCIA
 variancia <- function(x){
   mitjana <- mean(x)
   n <- length(x)
@@ -25,14 +26,16 @@ variancia(bellavista) #VARIÀNCIA
 
 sd(bellavista) #DESVIACIÓ TÍPICA CORREGIDA
 
-desv<-function(x){
+# FUNCIÓ PER CALCULAR LA DESVIACIÓ TÍPICA
+desviacio_tipica<-function(x){
   mitjana<-mean(x)
   n<- length(x)
   fdd<-(x-rep(mitjana,n))**2/n
   sum(fdd)
   res<-sqrt(fdd)
 }
-desv(bellavista) #DESVIACIÓ TÍPICA
+
+desviacio_tipica(bellavista) #DESVIACIÓ TÍPICA
 
 "APARTAT C"
 fitxer<-read.csv("R/bonambient.csv")
@@ -44,8 +47,8 @@ cumsum(table(bonambient)/length(bonambient))#TAULA DE FREQÜÈNCIES RELATIVES AC
 
 mean(bonambient) #MITJANA 
 median(bonambient) #MEDIANA
-sd(bonambient) #DESVIACIÓ TÍPICA
-var(bonambient) #VARIÀNCIA 
+desviacio_tipica(bonambient) #DESVIACIÓ TÍPICA
+variancia(bonambient) #VARIÀNCIA 
 
 
 "APARTAT D"
@@ -58,8 +61,29 @@ barplot(x2, main="Hotel Bonambient", sub="Valoracions dels usuaris")
 boxplot(bellavista, main="Hotel Bellavista")
 boxplot(bonambient, main="Hotel Bonambient")
 "Exercici 2"
-"APARTAT A
+"APARTAT A"
 library(dplyr) # Per poder utilitzar la funció filter
 df<-load("~/R/motos.RData")
+# Separem les motos en dues taules segons la transmissió, i n'extreiem la columna preu
 cadena<- (motos %>% filter(TRANSMISSIO=="Cadena"))$PREU
 corretja<- (motos %>% filter(TRANSMISSIO=="Corretja"))$PREU
+# MITJANES
+mean(cadena)
+mean(corretja)
+# MEDIANES
+median(cadena)
+median(corretja)
+# VARIÀNCIES
+variancia(cadena)
+variancia(corretja)
+# DESVIACIÓ TÍPICA
+desviacio_tipica(cadena)
+desviacio_tipica(corretja)
+# PREU MÍNIM
+min(cadena)
+min(corretja)
+# PREU MÀXIM
+max(cadena)
+max(corretja)
+"APARTAT B"
+# Coeficient de variació = desviació típica/mitjana
