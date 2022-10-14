@@ -31,8 +31,9 @@ desviacio_tipica<-function(x){
   mitjana<-mean(x)
   n<- length(x)
   fdd<-(x-rep(mitjana,n))**2/n
-  sum(fdd)
-  res<-sqrt(fdd)
+  suma<-sum(fdd)
+  res<-sqrt(suma)
+  res
 }
 
 desviacio_tipica(bellavista) #DESVIACIÓ TÍPICA
