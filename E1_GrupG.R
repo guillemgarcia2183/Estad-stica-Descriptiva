@@ -103,6 +103,28 @@ CV_cor<-desviacio_tipica(corretja)/mean(corretja)
 boxplot(cadena, main="Motos amb transmissió per cadena")
 boxplot(corretja, main="Motos amb transmissió per corretja")
 
+"APARTAT D" 
+x<-motos$CV
+y<-motos$PREU
+recta<-lm(y~x)
+coef(recta)
+plot(x,y, xlab="Potència de la moto en CV", ylab="Preu de la moto en €", col = " deepskyblue3 ")
+abline(recta)
+
+"APARTAT E"
+# Selecció dels 3 primers valors
+potencies<-motos$CV[1:3]
+preus<-motos$PREU[1:3]
+# Valors ajustats
+va1<- round(cf[1]+cf[2]*potencies[1],2)
+va2<- round(cf[1]+cf[2]*potencies[2],2)
+va3<- round(cf[1]+cf[2]*potencies[3],2)
+# Residus
+r1<- round(va1-preus[1],2)
+r2<- round(va2-preus[2],2)
+r3<- round(va3-preus[3],2)
+# Previsió del preu d'una moto de 150 CV
+preu<- round(cf[1] + cf[2]*150,2)
 
 "EXERCICI 3, APARTAT A"
 x1 <- anscombe$x1
