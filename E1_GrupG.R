@@ -194,6 +194,43 @@ y3_v2 = base$y3
 recta3_v2 <- lm (y3_v2 ~ x3_v2)
 plot(x3_v2, y3_v2, main = "Canviant la tercera fila")
 abline(recta3_v2)
-
 "EXERCICI 4, APARTAT A"
-fitxer<-read.csv("R/bonambient.csv")
+fitxer<-read.csv("R/sao-paulo-properties-april-2019.csv")
+fitxer2<- (fitxer %>% filter(Negotiation.Type=="rent")) 
+saopaulo <- (fitxer2 %>% filter(Property.Type=="apartment")) 
+
+
+"APARTAT B"
+saopaulo %>% arrange(Price)
+
+"APARTAT C"
+preu <- saopaulo$Price
+mida <- saopaulo$Size
+
+#ANÀLISI NUMÈRIC
+mean(preu) #MITJANA
+variancia(preu) #VARIÀNCIA
+median(preu) #MEDIANA
+desviacio_tipica(preu) #DESVIACIÓ TÍPICA
+
+#GRÀFICA 
+par(mfrow = c(1,1))
+plot(mida,preu, main = 'Relació preu i mida del apartament')
+
+"APARTAT D"
+recta1 <- lm (preu ~ mida)
+plot(mida,preu, main = 'Relació preu i mida del apartament')
+abline(recta1)
+
+"APARTAT E"
+saopaulo2 <- (saopaulo %>% filter(District =="São Rafael/São Paulo" | District == "Anhanguera/São Paulo" | District == "Cambuci/Anhanguera/São Paulo"))
+preu <- saopaulo2$Price
+mida <- saopaulo2$Size
+ 
+mean(preu) #MITJANA
+variancia(preu) #VARIÀNCIA
+median(preu) #MEDIANA
+desviacio_tipica(preu) #DESVIACIÓ TÍPICA
+
+plot(mida,preu, main = 'Relació preu i mida del apartament')
+
