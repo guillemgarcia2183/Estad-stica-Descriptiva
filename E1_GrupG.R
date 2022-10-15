@@ -4,9 +4,9 @@ frequencies <- c(2,8,5,13,20,37,50,68,42,19) #FREQÜÈNCIA DE LES VALORACIONS EN
 bellavista <- rep(valoracions, frequencies)
 
 table(bellavista) #TAULA DE FREQÜÈNCIES ABSOLUTES
-cumsum(table(bellavista)) #TAULA DE FREQÜÈNCIES ABSOLUTES ACOMULADA
+cumsum(table(bellavista)) #TAULA DE FREQÜÈNCIES ABSOLUTES ACOMULADES
 
-table(round(bellavista/length(bellavista), digits = 3)) #TAULA DE FREQÜÈNCIA RELATIVA
+round(table(bellavista)/length(bellavista), digits = 3) #TAULA DE FREQÜÈNCIA RELATIVA
 cumsum(round(table(bellavista)/length(bellavista), digits = 3))#TAULA DE FREQÜÈNCIES RELATIVES ACOMULADES
 
 "APARTAT B"
