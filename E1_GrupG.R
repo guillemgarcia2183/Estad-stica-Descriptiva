@@ -1,12 +1,13 @@
-"EXERCICI 1"
-"APARTAT A"
+"EXERCICI 1, APARTAT A"
 valoracions <- c(1,2,3,4,5,6,7,8,9,10) #VALORS DE LES VALORACIONS
 frequencies <- c(2,8,5,13,20,37,50,68,42,19) #FREQÜÈNCIA DE LES VALORACIONS EN ORDRE
 bellavista <- rep(valoracions, frequencies)
+
 table(bellavista) #TAULA DE FREQÜÈNCIES ABSOLUTES
-table(bellavista)/length(bellavista) #TAULA DE FREQÜÈNCIA RELATIVA
-cumsum(table(bellavista)) #TAULA DE FREQÜÈNCIES ABSOLUTES ACUMULADA
-cumsum(table(bellavista)/length(bellavista))#TAULA DE FREQÜÈNCIES RELATIVES ACUMULADA
+cumsum(table(bellavista)) #TAULA DE FREQÜÈNCIES ABSOLUTES ACOMULADA
+
+table(round(bellavista/length(bellavista), digits = 3)) #TAULA DE FREQÜÈNCIA RELATIVA
+cumsum(round(table(bellavista)/length(bellavista), digits = 3))#TAULA DE FREQÜÈNCIES RELATIVES ACOMULADES
 
 "APARTAT B"
 mean(bellavista) #MITJANA DE LA TAULA 
