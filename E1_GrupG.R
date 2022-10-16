@@ -100,8 +100,8 @@ CV_cad<-desviacio_tipica(cadena)/mean(cadena)
 CV_cor<-desviacio_tipica(corretja)/mean(corretja)
 
 "APARTAT C" 
-boxplot(cadena, main="Motos amb transmissió per cadena")
-boxplot(corretja, main="Motos amb transmissió per corretja")
+boxplot(cadena, main="Motos amb transmissió per cadena", ylab = "Preu (€)")
+boxplot(corretja, main="Motos amb transmissió per corretja", ylab = "Preu (€)")
 
 "APARTAT D" 
 x<-motos$CV
@@ -239,7 +239,7 @@ habitacions <- saopaulo$Rooms
 ascensor <- saopaulo$Elevator
 districte <- saopaulo$District
 
-     
+
 #ANÀLISI NUMÈRIC DEL PREU
 mean(preu) #MITJANA
 variancia(preu) #VARIÀNCIA
