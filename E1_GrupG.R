@@ -57,11 +57,11 @@ variancia(bonambient) #VARIÀNCIA
 # DIAGRAMES DE BARRES
 x1<-table(bellavista)
 x2<-table(bonambient)
-barplot(x1, main="Hotel Bellavista", sub="Valoracions dels usuaris")
-barplot(x2, main="Hotel Bonambient", sub="Valoracions dels usuaris")
+barplot(x1, main="Hotel Bellavista", xlab = "Valoracions", ylab = "Freqüències")
+barplot(x2, main="Hotel Bonambient", xlab = "Valoracions", ylab = "Freqüències")
 # DIAGRAMES DE CAIXES
-boxplot(bellavista, main="Hotel Bellavista")
-boxplot(bonambient, main="Hotel Bonambient")
+boxplot(bellavista, main="Hotel Bellavista", ylab = "Valoracions")
+boxplot(bonambient, main="Hotel Bonambient", ylab = "Valoracions")
 
 "Exercici 2, APARTAT A"
 library(dplyr) # Per poder utilitzar la funció filter
@@ -126,6 +126,7 @@ r3<- round(va3-preus[3],2)
 # Previsió del preu d'una moto de 150 CV
 preu<- round(cf[1] + cf[2]*150,2)
 
+
 "EXERCICI 3, APARTAT A"
 x1 <- anscombe$x1
 x2 <- anscombe$x2
@@ -169,10 +170,10 @@ D <- plot(x4, y4, main = "Quarta parella")
 
 "APARTAT C"
 #COEFICIENT DE CORRELACIÓ
-cor (x1,y1) #PRIMERA PARELLA
-cor (x2,y2) #SEGONA PARELLA
-cor (x3,y3) #TERCERA PARELLA
-cor (x4,y4) #QUARTA PARELLA
+cor(x1,y1) #PRIMERA PARELLA
+cor(x2,y2) #SEGONA PARELLA
+cor(x3,y3) #TERCERA PARELLA
+cor(x4,y4) #QUARTA PARELLA
 
 #CREAR RECTES DE CADA PARELLA
 recta1 <- lm (y1 ~ x1)
@@ -211,48 +212,92 @@ abline (recta3)
 
 #TERCERA PARELLA TREIENT LA TERCERA FILA 
 base = anscombe[-3,]
-x3_v2 = base$x3
-y3_v2 = base$y3
+x3_v2 <- base$x3
+y3_v2 <- base$y3
 recta3_v2 <- lm (y3_v2 ~ x3_v2)
 plot(x3_v2, y3_v2, main = "Canviant la tercera fila")
 abline(recta3_v2)
+
 "EXERCICI 4, APARTAT A"
 fitxer<-read.csv("R/sao-paulo-properties-april-2019.csv")
 fitxer2<- (fitxer %>% filter(Negotiation.Type=="rent")) 
 saopaulo <- (fitxer2 %>% filter(Property.Type=="apartment")) 
 
-
 "APARTAT B"
 saopaulo %>% arrange(Price)
+#TROBAR LA FILA DEL PIS MÉS BARAT
+nou_data <- subset(fitxer, preu == 480)
+nou_data
+
 
 "APARTAT C"
 preu <- saopaulo$Price
 mida <- saopaulo$Size
+preu_condomini <- saopaulo$Condo
+habitacions <- saopaulo$Rooms
+ascensor <- saopaulo$Elevator
+districte <- saopaulo$District
 
-#ANÀLISI NUMÈRIC
+     
+#ANÀLISI NUMÈRIC DEL PREU
 mean(preu) #MITJANA
 variancia(preu) #VARIÀNCIA
 median(preu) #MEDIANA
 desviacio_tipica(preu) #DESVIACIÓ TÍPICA
 
-#GRÀFICA 
-par(mfrow = c(1,1))
-plot(mida,preu, main = 'Relació preu i mida del apartament')
+#GRÀFIQUES 
+par(mfrow = c(2,2))
+plot(mida,preu, main = 'Relació preu i mida del apartament', xlab = "mida (m**2)", ylab = "preu (R$)")
+plot(preu_condomini,preu, main = 'Relació preu i preu de condomini del apartament', xlab = "condomini (R$)", ylab = "preu (R$)" )
+plot(habitacions,preu, main = 'Relació preu i habitacions', xlab = "habitacions", ylab = "preu (R$)" )
+plot(ascensor,preu, main = 'Relació preu i ascensor', xlab = "ascensor", ylab = "preu (R$)" )
+
 
 "APARTAT D"
+#RECTA DE REGRESSIÓ MIDA/PREU
+par(mfrow = c(1,1))
 recta1 <- lm (preu ~ mida)
-plot(mida,preu, main = 'Relació preu i mida del apartament')
+plot(mida,preu, main = 'Relació preu i mida del apartament', xlab = "mida (m**2)", ylab = "preu (R$)")
 abline(recta1)
 
-"APARTAT E"
-saopaulo2 <- (saopaulo %>% filter(District =="São Rafael/São Paulo" | District == "Anhanguera/São Paulo" | District == "Cambuci/Anhanguera/São Paulo"))
-preu <- saopaulo2$Price
-mida <- saopaulo2$Size
- 
-mean(preu) #MITJANA
-variancia(preu) #VARIÀNCIA
-median(preu) #MEDIANA
-desviacio_tipica(preu) #DESVIACIÓ TÍPICA
 
-plot(mida,preu, main = 'Relació preu i mida del apartament')
+"APARTAT E"
+barri1 <- (saopaulo %>% filter(District =="São Rafael/São Paulo"))
+barri2 <- (saopaulo %>% filter(District =="Anhanguera/São Paulo"))
+barri3 <- (saopaulo %>% filter(District =="Cambuci/São Paulo"))
+
+preu1 <- barri1$Price
+preu2 <- barri2$Price
+preu3 <- barri3$Price
+
+#CÀLCULS DE CENTRE I DISPERSIÓ BARRI SAO RAFAEL
+mitjana1 <- mean(preu1) #MITJANA
+var1 <- variancia(preu1) #VARIÀNCIA
+med1 <- median(preu1) #MEDIANA
+des1 <- desviacio_tipica(preu1) #DESVIACIÓ TÍPICA
+
+#CÀLCULS DE CENTRE I DISPERSIÓ BARRI ANHANGUERA
+mitjana2 <- mean(preu2) #MITJANA
+var2 <- variancia(preu2) #VARIÀNCIA
+med2 <- median(preu2) #MEDIANA
+des2 <- desviacio_tipica(preu2) #DESVIACIÓ TÍPICA
+
+#CÀLCULS DE CENTRE I DISPERSIÓ BARRI CAMBUCI
+mitjana3 <- mean(preu3) #MITJANA
+var3 <- variancia(preu3) #VARIÀNCIA
+med3 <- median(preu3) #MEDIANA
+des3 <- desviacio_tipica(preu3) #DESVIACIÓ TÍPICA
+
+mitjanes <- c(mitjana1,mitjana2,mitjana3)
+variancies <- c(var1,var2,var3)
+medianes <- c(med1,med2,med3)
+desv <- c(des1,des2,des3)
+
+#GRÀFIQUES
+par(mfrow = c(2,2))
+barplot(mitjanes, main = 'Comparació  de mitjanes entre barris de Sao Paulo', ylab = "Preu (R$)", names.arg = c("São Rafael", "Anhanguera", "Cambuci"), xlab = "Barris")
+barplot(variancies, main = 'Comparació  de variàncies entre barris de Sao Paulo', ylab = "Preu (R$**2)", names.arg = c("São Rafael", "Anhanguera", "Cambuci"), xlab = "Barris")
+barplot(medianes, main = 'Comparació  de medianes entre barris de Sao Paulo', ylab = "Preu (R$)", names.arg = c("São Rafael", "Anhanguera", "Cambuci"), xlab = "Barris")
+barplot(desv, main = 'Comparació  de desviacions típiques entre barris de Sao Paulo', ylab = "Preu (R$)", names.arg = c("São Rafael", "Anhanguera", "Cambuci"), xlab = "Barris")
+
 
