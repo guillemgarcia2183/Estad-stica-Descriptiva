@@ -112,9 +112,10 @@ plot(x,y, xlab="Potència de la moto en CV", ylab="Preu de la moto en €", col 
 abline(recta)
 
 "APARTAT E"
-# Selecció dels 3 primers valors
+# Selecció dels 3 primers valors i guardem els coeficients de la recta de regressió
 potencies<-motos$CV[1:3]
 preus<-motos$PREU[1:3]
+cf<-coef(recta)
 # Valors ajustats
 va1<- round(cf[1]+cf[2]*potencies[1],2)
 va2<- round(cf[1]+cf[2]*potencies[2],2)
