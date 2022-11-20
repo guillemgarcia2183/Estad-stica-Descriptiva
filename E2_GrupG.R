@@ -34,9 +34,62 @@ lengths(filter(fitxer, OCI == 4 & TABAC == 0)) #22 PERSONES FAN ESPORT I NO FUME
 lengths(filter(fitxer, (OCI == 2 | OCI == 3) & TABAC == 1)) #27 PERSONES FUMEN I TENEN OCI ORDINADOR O MÚSICA/LECTURA
 
 "APARTAT E"
-lengths(filter(fitxer, PES > 60 & EDAT >= 20)) #72 PERSONES QUE PESEN MÉS 60 KG I TENEN MÉS DE 20 ANYS
-lengths(filter(fitxer, PES < 70 & EDAT <= 50))# 65 PERSONES QUE PESEN MENYS DE 70 KG I TENEN COM A MOLT 50 ANYS
+lengths(filter(fitxer, PES > 60 & EDAT >= 20)) # 72 PERSONES QUE PESEN MÉS 60 KG I TENEN MÉS DE 20 ANYS
+lengths(filter(fitxer, PES < 70 & EDAT <= 50)) # 65 PERSONES QUE PESEN MENYS DE 70 KG I TENEN COM A MOLT 50 ANYS
 
+
+"EXERCICI 2"
+"APARTAT A"
+
+dau <- function(k) {
+  if (k%%2)
+    return ((1+2*k)/36)
+  return ((k-1)/(5*k))
+}
+
+"APARTAT B"
+x<-c(1,2,3,4,5,6)
+prob1<-c(dau(1),dau(2),dau(3),dau(4),dau(5),dau(6))
+# Funció de massa de probabilitat
+plot (x, prob1,type="h",lwd=2,bty="n",las=1, xlim = c (1 ,6) , ylim = c (0 ,1), col= "red",ylab="Probabilitats",xlab="Valors del dau", main= "Funció de densitat")
+# Funció de distribució
+acumulacio1 <- cumsum (prob1)
+s1 <- stepfun (x , c (0 , acumulacio1))
+plot (s1 , verticals = FALSE,col= "red", main="Funció de distribució")
+# Comparació entre les dues funcións de distribució
+prob2<-rep(1/6,6)
+acumulacio2 <- cumsum (prob2)
+s2 <- stepfun (x , c (0 , acumulacio2))
+plot (s1 , verticals = FALSE, col= "red", main="Funció de distribució")
+lines(s2, verticals= FALSE, col="blue")
+legend(x="bottomright",legend=c("Dau trucat","Dau normal"),fill = c("red","blue"),title="Tipus de daus")
+
+"APARTAT C"
+prob_p<-dau(2)+dau(4)+dau(6)
+prob_s<-dau(1)+dau(3)+dau(5)
+prob_gt4<-dau(5)+dau(6)
+prob_lt5<-dau(1)+dau(2)+dau(3)+dau(4)
+
+"APARTAT D"
+# Apliquem la definició d'esperança del cas discret
+E<-1*dau(1)+2*dau(2)+3*dau(3)+4*dau(4)+5*dau(5)+6*dau # Esperança teòrica
+V<-(1**2)*dau(1)+(2**2)*dau(2)+(3**2)*dau(3)+(4**2)*dau(4)+(5**2)*dau(5)+(6**2)*dau(6)-E**2 # Variancia teòrica
+
+mostra<-sample(c(1,2,3,4,5,6), 300, prob=c(dau(1),dau(2),dau(3),dau(4),dau(5),dau(6)),replace=TRUE) # Creació de la mostra
+
+varp <- function(x){
+  mitjana <- mean(x)
+  n <- length(x)
+  sumatori <- sum((x - mitjana)**2)
+  variacio <- 1/n * sumatori
+  
+  variacio
+}
+esp<-mean(mostra) # Esperança empírica
+var<-varp(mostra) # Variància empírica
+
+"APARTAT E"
+p<-dau(1)*(dau(4)+dau(5)+dau(6)) + dau(2)*(dau(3)+dau(4)+dau(5)+dau(6)) + dau(3)*(dau(2)+dau(3)+dau(4)+dau(5)+dau(6))+dau(4)+dau(5)*(dau(1)+dau(2)+dau(3)+dau(4)+dau(5))+dau(6)*(dau(1)+dau(2)+dau(3)+dau(4)) 
 
 
 "EXERCICI 3"
