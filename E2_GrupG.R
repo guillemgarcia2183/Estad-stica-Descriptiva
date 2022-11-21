@@ -72,7 +72,7 @@ prob_lt5<-dau(1)+dau(2)+dau(3)+dau(4)
 
 "APARTAT D"
 # Apliquem la definició d'esperança del cas discret
-E<-1*dau(1)+2*dau(2)+3*dau(3)+4*dau(4)+5*dau(5)+6*dau # Esperança teòrica
+E<-1*dau(1)+2*dau(2)+3*dau(3)+4*dau(4)+5*dau(5)+6*dau(6) # Esperança teòrica
 V<-(1**2)*dau(1)+(2**2)*dau(2)+(3**2)*dau(3)+(4**2)*dau(4)+(5**2)*dau(5)+(6**2)*dau(6)-E**2 # Variancia teòrica
 
 mostra<-sample(c(1,2,3,4,5,6), 300, prob=c(dau(1),dau(2),dau(3),dau(4),dau(5),dau(6)),replace=TRUE) # Creació de la mostra
@@ -164,5 +164,41 @@ for(i in seq_along(y)){
     sumatori <- sumatori + 1}
 }
 sumatori
+
+"EXERCICI 4"
+"APARTAT A"
+# P(X<295) = P(X<=295)
+p1<-pnorm(295,298,3)
+# P(290<X<310)=P(X<=310)-P(X<=290)
+p2<-pnorm(310,298,3)-pnorm(290,298,3)
+
+"APARTAT B"
+# 1P(X>=k)=0.05 --> P(X<=k)=1-0.05
+q<-qnorm(0.95,298,3)
+
+"APARTAT C"
+# Una ampolla defectuosa depèn de y<-pnorm(295,298,3)
+y<-pnorm(295,298,3)
+# Y-> 2 ampolles de 6 són defectuoses
+# Per tant Y~Binom(6,y). En aquest cas ens interessa P(Y>=2)=1-P(Y<2)=1-P(Y<=1)=1-pbinom(1,6,y)
+Y<-1-pbinom(1,6,y)
+# X~Binom(30,100,Y)
+p_retorn<-dbinom(30,100,Y)
+
+"APARTAT D"
+# E(X)=np
+E<-100*Y
+# Var(X)=np(1-p)
+Var<-100*Y*(1-Y)
+
+"APARTAT E"
+# Aproximació
+p<-1- pnorm(29,24,sqrt(18.44682))  
+
+
+
+
+
+
 
 
